@@ -1,0 +1,23 @@
+{
+    "credits": "Developed by WiVe (William Verhaeghe)\nwive.be",
+    "general_label_continue": "Continue",
+    "general_label_quit": "Quit",
+    "general_label_loading": "Loading...",
+    "general_label_yes": "Yes",
+    "general_label_no": "No",
+    "general_label_back": "Back",
+    "menu_continue": "Continue",
+    "menu_settings": "Settings",
+    "menu_achievements": "Achievements",
+    "menu_credits": "Credits",
+    "game_won": "You won!",
+    "game_lost": "You lost!",
+    "game_earned_xp": "And gained %1$d xp",
+    "settings_confirm_reset_title": "Are you sure?",
+    "settings_confirm_reset_body": "This will reset all progress, you will get nothing in return.",
+    "settings_primary_colour": "Primary colour",
+    "settings_reset_progress": "Reset progress",
+    "settings_language": "Language",
+    "settings_language_dutch": "Nederlands",
+    "settings_language_english": "English"
+}

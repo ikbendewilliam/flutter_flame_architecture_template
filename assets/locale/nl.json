@@ -1,0 +1,23 @@
+{
+    "credits": "Gemaakt door WiVe (William Verhaeghe)\nwive.be",
+    "general_label_continue": "Volgende",
+    "general_label_quit": "Stop",
+    "general_label_loading": "Laden...",
+    "general_label_yes": "Ja",
+    "general_label_no": "Nee",
+    "general_label_back": "Terug",
+    "menu_continue": "Verder spelen",
+    "menu_settings": "Instellingen",
+    "menu_achievements": "Achievements",
+    "menu_credits": "Credits",
+    "game_won": "Je bent gewonnen!",
+    "game_lost": "Je bent verloren!",
+    "game_earned_xp": "en krijgt %1$d xp",
+    "settings_confirm_reset_title": "Ben je zeker?",
+    "settings_confirm_reset_body": "Al je vooruitgang wordt gereset en je krijgt hiervoor niets terug.",
+    "settings_primary_colour": "Hoofdkleur",
+    "settings_reset_progress": "Spel resetten",
+    "settings_language": "Taal",
+    "settings_language_dutch": "Nederlands",
+    "settings_language_english": "English"
+}

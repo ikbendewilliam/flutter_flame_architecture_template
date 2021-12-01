@@ -1,0 +1,4 @@
+enum GameBoardUIState {
+  Default,
+  Speed,
+}

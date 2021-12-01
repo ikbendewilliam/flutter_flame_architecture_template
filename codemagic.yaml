@@ -1,0 +1,64 @@
+# Automatically generated on 2021-10-31 UTC from https://codemagic.io/app/611045e187b6fbc935faaeed/settings
+# Note that this configuration is not an exact match to UI settings. Review and adjust as necessary.
+
+workflows:
+  default-workflow:
+    name: Default Workflow
+    max_build_duration: 60
+    environment:
+      vars:
+        FCI_KEYSTORE_PATH: ...
+        FCI_KEYSTORE: ...
+        FCI_KEYSTORE_PASSWORD: ...
+        FCI_KEY_PASSWORD: ...
+        FCI_KEY_ALIAS: ...1
+        APP_STORE_CONNECT_ISSUER_ID: ...
+        APP_STORE_CONNECT_KEY_IDENTIFIER: ...
+        APP_STORE_CONNECT_PRIVATE_KEY: ...
+        CERTIFICATE_PRIVATE_KEY: ...
+      flutter: stable
+      xcode: latest
+      cocoapods: default
+    scripts:
+      - |
+        # set up key.properties
+        echo $FCI_KEYSTORE | base64 --decode > $FCI_KEYSTORE_PATH
+        cat >> "$FCI_BUILD_DIR/android/key.properties" <<EOF
+        storePassword=$FCI_KEYSTORE_PASSWORD
+        keyPassword=$FCI_KEY_PASSWORD
+        keyAlias=$FCI_KEY_ALIAS
+        storeFile=/tmp/keystore.keystore
+        EOF
+      - |
+        # set up local properties
+        echo "flutter.sdk=$HOME/programs/flutter" > "$FCI_BUILD_DIR/android/local.properties"
+      - flutter packages pub get
+      - flutter clean
+      - flutter build appbundle --release
+      - find . -name "Podfile" -execdir pod install \;
+      - keychain initialize
+      - app-store-connect fetch-signing-files "com.template" --type IOS_APP_STORE
+        --create
+      - keychain add-certificates
+      - xcode-project use-profiles
+      - flutter build ipa --export-options-plist=/Users/builder/export_options.plist
+    artifacts:
+      - build/**/outputs/apk/**/*.apk
+      - build/**/outputs/bundle/**/*.aab
+      - build/**/outputs/**/mapping.txt
+      - build/ios/ipa/*.ipa
+      - /tmp/xcodebuild_logs/*.log
+      - flutter_drive.log
+    publishing:
+      email:
+        recipients:
+          - email@example.com
+      google_play:
+        credentials: ...
+        track: alpha
+        in_app_update_priority: 0
+      app_store_connect:
+        api_key: ...
+        key_id: ...
+        issuer_id: ...
+        submit_to_testflight: true

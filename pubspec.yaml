@@ -1,0 +1,57 @@
+name: flutter_flame_architecture_template
+description: The bestest of games
+
+publish_to: "none"
+version: 0.0.1+1
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  cryptography: ^2.0.2
+  # firebase_analytics: 8.3.1
+  # firebase_core: 1.6.0
+  # firebase_crashlytics: 2.2.1
+  flame: ^1.0.0-releasecandidate.13
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  flutter_flame_architecture: 0.0.1-prerelease.8
+  flutter_secure_storage: ^4.2.1
+  # games_services: ^2.0.0-nullsafety.3
+  get_it: 7.2.0
+  injectable: ^1.5.0
+  locale_gen: ^3.6.1
+  package_info: 2.0.2
+  path_provider: ^2.0.6
+  provider: ^6.0.1
+  cupertino_icons: ^1.0.2
+  shared_preferences: 2.0.6
+  # google_mobile_ads: ^0.13.4
+
+dev_dependencies:
+  build_runner: 2.1.1
+  flutter_test:
+    sdk: flutter
+  flutter_launcher_icons: ^0.9.1
+  injectable_generator: ^1.5.2
+  mockito: ^5.0.16
+
+flutter:
+  assets:
+    - assets/images/title.jpg
+    - assets/locale/
+  uses-material-design: true
+
+flutter_icons:
+  android: true
+  ios: false
+  image_path: "assets/logo.png"
+
+locale_gen:
+  default_language:
+  languages: ["en", "nl"]
+  locale_assets_path: "assets/locale/"
+  assets_path: "assets/locale/"
+  doc_languages: ["en", "nl"]

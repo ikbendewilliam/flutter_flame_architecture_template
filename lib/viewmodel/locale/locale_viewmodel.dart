@@ -1,0 +1,60 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_flame_architecture_template/repository/locale/locale_repository.dart';
+import 'package:flutter_flame_architecture_template/util/locale/custom_localization_overrides.dart';
+import 'package:flutter_flame_architecture_template/util/locale/localization_delegate.dart';
+
+class LocaleViewModel with ChangeNotifier {
+  final LocaleRepository _localeRepository;
+  final languages = ['en', 'nl'];
+  var index = -1;
+
+  var customLocalizationOverrides = CustomLocalizationOverrideManager();
+  late var localeDelegate = LocalizationDelegate(
+    localizationOverrides: customLocalizationOverrides,
+  );
+
+  LocaleViewModel(this._localeRepository);
+
+  void init() {
+    initLocale();
+    refreshOverrideLocalizations();
+  }
+
+  Future<void> initLocale() async {
+    final locale = await _localeRepository.getCustomLocale();
+    if (locale != null) {
+      localeDelegate = LocalizationDelegate(
+        newLocale: locale,
+        localizationOverrides: customLocalizationOverrides,
+      );
+      index = languages.indexOf(locale.languageCode);
+      notifyListeners();
+    }
+  }
+
+  Future<void> refreshOverrideLocalizations() async {
+    await customLocalizationOverrides.refreshOverrideLocalizations();
+    await initLocale();
+  }
+
+  Future<void> onSwitchToDutch() async {
+    await _onUpdateLocaleClicked(const Locale('nl'));
+  }
+
+  Future<void> onSwitchToEnglish() async {
+    await _onUpdateLocaleClicked(const Locale('en'));
+  }
+
+  Future<void> onSwitchToSystemLanguage() async {
+    await _onUpdateLocaleClicked(null);
+  }
+
+  Future<void> _onUpdateLocaleClicked(Locale? locale) async {
+    await _localeRepository.setCustomLocale(locale);
+    localeDelegate = LocalizationDelegate(
+      newLocale: locale,
+      localizationOverrides: customLocalizationOverrides,
+    );
+    notifyListeners();
+  }
+}
